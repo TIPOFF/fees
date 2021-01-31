@@ -2,11 +2,10 @@
 
 namespace Tipoff\Fees;
 
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Tipoff\Fees\Commands\FeesCommand;
-use Illuminate\Support\Str;
-
 
 class FeesServiceProvider extends PackageServiceProvider
 {
