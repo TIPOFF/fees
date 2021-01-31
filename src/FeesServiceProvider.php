@@ -19,7 +19,7 @@ class FeesServiceProvider extends PackageServiceProvider
             ->name('fees')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_fees_table')
+            ->hasMigration('2020_02_16_120000_create_fees_table')
             ->hasCommand(FeesCommand::class);
     }
 }
