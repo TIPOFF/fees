@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Tipoff\Fees\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tipoff\Support\Models\BaseModel;
 
@@ -33,10 +34,10 @@ class Fee extends BaseModel
         });
         static::saving(function ($fee) {
             if (empty($fee->amount) && empty($fee->percent)) {
-                throw new \Exception('A fee must have either an amount or percent.');
+                throw new Exception('A fee must have either an amount or percent.');
             }
             if (! empty($fee->amount) && ! empty($fee->percent)) {
-                throw new \Exception('A fee cannot have both an amount & percent.');
+                throw new Exception('A fee cannot have both an amount & percent.');
             }
         });
     }
@@ -59,36 +60,5 @@ class Fee extends BaseModel
     public function bookings()
     {
         return $this->hasMany(config('fees.booking_model'));
-    }
-
-    /**
-     * Generate fees by cart item.
-     *
-     * @return int
-     */
-    public function generateTotalFeesByCartItem(CartItem $cartItem): int
-    {
-        $fee = 0;
-
-        switch ($this->applies_to) {
-            case self::APPLIES_TO_PRODUCT:
-                break;
-            case self::APPLIES_TO_BOOKING:
-            case self::APPLIES_TO_EACH:
-                if (! empty($this->percent)) {
-                    $fee = $cartItem->amount * ($this->percent / 100);
-                }
-                if (! empty($this->amount)) {
-                    $fee += $this->amount;
-                }
-
-                break;
-            case self::APPLIES_TO_PARTICIPANT:
-                $fee = $cartItem->participants * $this->amount;
-
-                break;
-        }
-
-        return $fee;
     }
 }
