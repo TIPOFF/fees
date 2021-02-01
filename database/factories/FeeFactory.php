@@ -2,7 +2,7 @@
 
 
 
-namespace Database\Factories;
+namespace Tipoff\Fees\Database\Factories;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
