@@ -4,6 +4,7 @@ namespace Tipoff\Fees\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Tipoff\Fees\Database\Factories\FeeFactory;
 use Tipoff\Support\Models\BaseModel;
 
 class Fee extends BaseModel
@@ -17,6 +18,11 @@ class Fee extends BaseModel
 
     protected $guarded = ['id'];
     protected $casts = [];
+
+    protected static function newFactory()
+    {
+        return FeeFactory::new();
+    }
 
     public function getRouteKeyName()
     {
