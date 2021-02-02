@@ -39,7 +39,7 @@ class FeeFactory extends Factory
             'amount'        => $amount,
             'percent'       => $percent,
             'applies_to'    => $this->faker->randomElement(['booking', 'participant', 'product', 'each']),
-            'creator_id'    => Support::randomOrCreate(config('fees.user_model')),
+            'creator_id'    => Support::randomOrCreate(config('fees.model_class.user')),
         ];
     }
 }

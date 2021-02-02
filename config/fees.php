@@ -1,12 +1,16 @@
 <?php
 
 return [
-    //Users Model
-    'user_model' => \App\Models\User::class,
 
-    //Location model
-    'location_model' => \App\Models\Location::class,
+    /**
+     * Model class references
+     */
+    'model_class' => [
+        'user' => \App\Models\User::class,
 
-    //Booking Model
-    'booking_class' => \App\Models\Booking::class,
+        'location' => \App\Models\Location::class,
+
+        'booking' => \App\Models\Booking::class,
+    ]
+
 ];
