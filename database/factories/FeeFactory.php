@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace Tipoff\Fees\Database\Factories;
 
 use Illuminate\Support\Str;
