@@ -55,11 +55,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/tipoff/support"
-        }
-    ]
+    "prefer-stable": true
 }
