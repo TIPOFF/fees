@@ -50,21 +50,21 @@ class Fee extends BaseModel
 
     public function creator()
     {
-        return $this->belongsTo(config('fees.model_class.user'), 'creator_id');
+        return $this->belongsTo(config('tipoff.model_class.user'), 'creator_id');
     }
 
     public function locationBookingFees()
     {
-        return $this->hasMany(config('fees.model_class.location'), 'booking_fee_id');
+        return $this->hasMany(config('tipoff.model_class.location'), 'booking_fee_id');
     }
 
     public function locationProductFees()
     {
-        return $this->hasMany(config('fees.model_class.location'), 'product_fee_id');
+        return $this->hasMany(config('tipoff.model_class.location'), 'product_fee_id');
     }
 
     public function bookings()
     {
-        return $this->hasMany(config('fees.model_class.booking'));
+        return $this->hasMany(config('tipoff.model_class.booking'));
     }
 }
