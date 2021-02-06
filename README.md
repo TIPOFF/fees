@@ -5,7 +5,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/tipoff/fees.svg?style=flat-square)](https://packagist.org/packages/tipoff/fees)
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+
+This is where your description should go.
+
 
 ## Installation
 
@@ -23,6 +25,7 @@ php artisan migrate
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Tipoff\Fees\FeesServiceProvider" --tag="fees-config"
 ```
