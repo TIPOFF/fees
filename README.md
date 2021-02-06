@@ -1,11 +1,13 @@
 # Laravel Package for implementing Ecommerce fees
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tipoff/fees.svg?style=flat-square)](https://packagist.org/packages/tipoff/fees)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tipoff/fees/run-tests?label=tests)](https://github.com/tipoff/fees/actions?query=workflow%3ATests+branch%3Amaster)
+![Tests](https://github.com/tipoff/fees/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/tipoff/fees.svg?style=flat-square)](https://packagist.org/packages/tipoff/fees)
 
 
+
 This is where your description should go.
+
 
 ## Installation
 
@@ -23,6 +25,7 @@ php artisan migrate
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Tipoff\Fees\FeesServiceProvider" --tag="fees-config"
 ```
