@@ -3,13 +3,13 @@
 namespace Tipoff\Fees\Models;
 
 use Exception;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tipoff\Fees\Database\Factories\FeeFactory;
 use Tipoff\Support\Models\BaseModel;
+use Tipoff\Support\Traits\HasPackageFactory;
 
 class Fee extends BaseModel
 {
-    use HasFactory;
+    use HasPackageFactory;
 
     const APPLIES_TO_EACH = 'each';
     const APPLIES_TO_PRODUCT = 'product';
