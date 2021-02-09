@@ -4,6 +4,7 @@ namespace Tipoff\Fees\Database\Factories;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Tipoff\Fees\Models\Fee;
 
 class FeeFactory extends Factory
 {
@@ -12,7 +13,7 @@ class FeeFactory extends Factory
      *
      * @var string
      */
-    protected $model =app('fee');
+    protected $model = Fee::class;
 
     /**
      * Define the model's default state.
