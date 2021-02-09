@@ -5,10 +5,12 @@ namespace Tipoff\Fees\Models;
 use Exception;
 use Tipoff\Fees\Database\Factories\FeeFactory;
 use Tipoff\Support\Models\BaseModel;
+use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
 
 class Fee extends BaseModel
 {
+    use HasCreator;
     use HasPackageFactory;
 
     const APPLIES_TO_EACH = 'each';
@@ -33,11 +35,6 @@ class Fee extends BaseModel
     {
         parent::boot();
 
-        static::creating(function ($fee) {
-            if (auth()->check()) {
-                $fee->creator_id = auth()->id();
-            }
-        });
         static::saving(function ($fee) {
             if (empty($fee->amount) && empty($fee->percent)) {
                 throw new Exception('A fee must have either an amount or percent.');
@@ -46,11 +43,6 @@ class Fee extends BaseModel
                 throw new Exception('A fee cannot have both an amount & percent.');
             }
         });
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(app('user'), 'creator_id');
     }
 
     public function locationBookingFees()
