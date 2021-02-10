@@ -2,9 +2,9 @@
 
 namespace Tipoff\Fees\Policies;
 
-use Tipoff\Fees\Models\Fee;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Tipoff\Fees\Models\Fee;
 
 class FeePolicy
 {
