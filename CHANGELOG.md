@@ -10,3 +10,7 @@ All notable changes to `fees` will be documented in this file.
 
 - migrations loaded via package
 - model resolution via container
+
+## 1.1.1 - 2021-02-11
+
+- update migration
