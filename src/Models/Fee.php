@@ -59,4 +59,30 @@ class Fee extends BaseModel
     {
         return $this->hasMany(app('booking'));
     }
+
+    public function generateTotalFeesByCartItem($cartItem): int
+    {
+        $fee = 0;
+
+        switch ($this->applies_to) {
+            case self::APPLIES_TO_PRODUCT:
+                break;
+            case self::APPLIES_TO_BOOKING:
+            case self::APPLIES_TO_EACH:
+                if (! empty($this->percent)) {
+                    $fee = $cartItem->amount * ($this->percent / 100);
+                }
+                if (! empty($this->amount)) {
+                    $fee += $this->amount;
+                }
+
+                break;
+            case self::APPLIES_TO_PARTICIPANT:
+                $fee = $cartItem->participants * $this->amount;
+
+                break;
+        }
+
+        return $fee;
+    }
 }
