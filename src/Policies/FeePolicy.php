@@ -1,48 +1,93 @@
 <?php
 
-declare(strict_types=1);
+namespace Tipoff\Fees\Policies;
 
-namespace Tipoff\Waivers\Policies;
-
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Tipoff\Support\Contracts\Models\UserInterface;
 use Tipoff\Fees\Models\Fee;
 
-class SignaturePolicy
+class FeePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(UserInterface $user): bool
+    /**
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
     {
         return $user->hasPermissionTo('view fees') ? true : false;
     }
 
-    public function view(UserInterface $user, Fee $fee): bool
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Fee  $fee
+     * @return mixed
+     */
+    public function view(User $user, Fee $fee)
     {
         return $user->hasPermissionTo('view fees') ? true : false;
     }
 
-    public function create(UserInterface $user): bool
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        return $user->hasPermissionTo('create fees') ? true : false;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Fee  $fee
+     * @return mixed
+     */
+    public function update(User $user, Fee $fee)
+    {
+        return $user->hasPermissionTo('update fees') ? true : false;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Fee  $fee
+     * @return mixed
+     */
+    public function delete(User $user, Fee $fee)
     {
         return false;
     }
 
-    public function update(UserInterface $user, Fee $fee): bool
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Fee  $fee
+     * @return mixed
+     */
+    public function restore(User $user, Fee $fee)
     {
         return false;
     }
 
-    public function delete(UserInterface $user, Fee $fee): bool
-    {
-        return false;
-    }
-
-    public function restore(UserInterface $user, Fee $fee): bool
-    {
-        return false;
-    }
-
-    public function forceDelete(UserInterface $user, Fee $fee): bool
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Fee  $fee
+     * @return mixed
+     */
+    public function forceDelete(User $user, Fee $fee)
     {
         return false;
     }
