@@ -18,7 +18,6 @@ class Fee extends BaseModel
     const APPLIES_TO_BOOKING = 'booking';
     const APPLIES_TO_PARTICIPANT = 'participant';
 
-    protected $guarded = ['id'];
     protected $casts = [];
 
     protected static function newFactory()
