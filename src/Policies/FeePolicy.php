@@ -3,8 +3,8 @@
 namespace Tipoff\Fees\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Tipoff\Support\Contracts\Models\UserInterface;
 use Tipoff\Fees\Models\Fee;
+use Tipoff\Support\Contracts\Models\UserInterface;
 
 class FeePolicy
 {
