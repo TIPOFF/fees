@@ -7,6 +7,8 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Policies\FeePolicy;
+use Tipoff\Support\TipoffPackage;
+use Tipoff\Support\TipoffServiceProvider;
 
 class FeesServiceProvider extends PackageServiceProvider
 {
@@ -25,6 +27,12 @@ class FeesServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
+            ->hasModelInterfaces([
+                FeeInterface::class => Fee::class,
+            ])
+            ->hasPolicies([
+                Fee::class => FeePolicy::class,
+            ])
             ->name('fees')
             ->hasConfigFile()
             ->hasViews();
