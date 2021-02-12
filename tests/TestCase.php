@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tipoff\Fees\Tests;
 
+use Spatie\Permission\PermissionServiceProvider;
+use Tipoff\Authorization\AuthorizationServiceProvider;
 use Tipoff\Fees\FeesServiceProvider;
 use Tipoff\Support\SupportServiceProvider;
 use Tipoff\TestSupport\BaseTestCase;
@@ -12,6 +16,8 @@ class TestCase extends BaseTestCase
     {
         return [
             SupportServiceProvider::class,
+            AuthorizationServiceProvider::class,
+            PermissionServiceProvider::class,
             FeesServiceProvider::class,
         ];
     }

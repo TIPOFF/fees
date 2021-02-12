@@ -2,8 +2,11 @@
 
 namespace Tipoff\Fees;
 
+use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Tipoff\Fees\Models\Fee;
+use Tipoff\Fees\Policies\FeePolicy;
 
 class FeesServiceProvider extends PackageServiceProvider
 {
@@ -25,5 +28,10 @@ class FeesServiceProvider extends PackageServiceProvider
             ->name('fees')
             ->hasConfigFile()
             ->hasViews();
+    }
+
+    public function registeringPackage()
+    {
+        Gate::policy(Fee::class, FeePolicy::class);
     }
 }
