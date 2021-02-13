@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tipoff\Fees;
 
 use Tipoff\Fees\Models\Fee;
