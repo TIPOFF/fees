@@ -46,10 +46,7 @@
         "laravel": {
             "providers": [
                 "Tipoff\\Fees\\FeesServiceProvider"
-            ],
-            "aliases": {
-                "Fees": "Tipoff\\Fees\\FeesFacade"
-            }
+            ]
         }
     },
     "repositories": [
