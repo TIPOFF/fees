@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tipoff\Fees\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
