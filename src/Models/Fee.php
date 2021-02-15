@@ -84,6 +84,6 @@ class Fee extends BaseModel
                 break;
         }
 
-        return $fee;
+        return (int) $fee;
     }
 }
