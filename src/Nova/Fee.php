@@ -2,6 +2,7 @@
 
 namespace Tipoff\Fees\Nova;
 
+use \Tipoff\Fees\Models\Fee as FeeModel;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -15,7 +16,6 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Tipoff\Support\Nova\BaseResource;
-use \Tipoff\Fees\Models\Fee as FeeModel;
 
 class Fee extends BaseResource
 {
@@ -50,10 +50,10 @@ class Fee extends BaseResource
             Number::make('Amount')->sortable(),
             Number::make('Percent')->nullable(),
             Select::make('Applies To')->options([
-                FeeModel::APPLIES_TO_BOOKING     => 'Each Booking in Order',
+                FeeModel::APPLIES_TO_BOOKING => 'Each Booking in Order',
                 FeeModel::APPLIES_TO_PARTICIPANT => 'Each Participant in Bookings',
-                FeeModel::APPLIES_TO_PRODUCT     => 'Each Product in Order',
-                FeeModel::APPLIES_TO_EACH        => 'Each Booking & Product in Order',
+                FeeModel::APPLIES_TO_PRODUCT => 'Each Product in Order',
+                FeeModel::APPLIES_TO_EACH => 'Each Booking & Product in Order',
             ])->required(),
             Boolean::make('Is Taxed', 'is_taxed'),
 
