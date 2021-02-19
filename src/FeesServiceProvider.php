@@ -17,6 +17,9 @@ class FeesServiceProvider extends TipoffServiceProvider
             ->hasPolicies([
                 Fee::class => FeePolicy::class,
             ])
+            ->hasNovaResources([
+                \Tipoff\Fees\Nova\Fee::class,
+            ])
             ->name('fees')
             ->hasConfigFile();
     }
