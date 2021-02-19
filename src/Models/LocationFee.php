@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tipoff\Fees\Models;
 
-use Tipoff\Fees\Database\Factories\FeeFactory;
+use Tipoff\Locations\Models\Location;
 use Tipoff\Support\Models\BaseModel;
 use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
@@ -16,8 +16,27 @@ class LocationFee extends BaseModel
     use HasUpdater;
     use HasPackageFactory;
 
-    protected static function newFactory()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function location()
     {
-        return FeeFactory::new();
+        return $this->belongsTo(Location::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bookingFee()
+    {
+        return $this->belongsTo(app('fee'), 'booking_fee_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function productFee()
+    {
+        return $this->belongsTo(app('fee'), 'product_fee_id');
     }
 }
