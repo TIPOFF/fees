@@ -22,7 +22,7 @@ class PermissionsMigrationTest extends TestCase
             'view fees',
             'create fees',
             'update fees',
-            'delete fees'
+            'delete fees',
         ])->pluck('name');
 
         $this->assertCount(4, $seededPermissions);
