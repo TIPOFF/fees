@@ -7,6 +7,7 @@ namespace Tipoff\Fees\Database\Factories;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Tipoff\Fees\Models\Fee;
+use Tipoff\Support\Enums\AppliesTo;
 
 class FeeFactory extends Factory
 {
@@ -29,7 +30,7 @@ class FeeFactory extends Factory
             'title'         => $sentence,
             'amount'        => $amount,
             'percent'       => $percent,
-            'applies_to'    => $this->faker->randomElement(['booking', 'participant', 'product', 'each']),
+            'applies_to'    => $this->faker->randomElement(AppliesTo::getEnumerators()),
             'creator_id'    => randomOrCreate(app('user')),
         ];
     }
