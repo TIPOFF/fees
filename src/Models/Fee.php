@@ -6,11 +6,23 @@ namespace Tipoff\Fees\Models;
 
 use Exception;
 use Tipoff\Fees\Database\Factories\FeeFactory;
+use Tipoff\Support\Contracts\Sellable\Fee as FeeInterface;
 use Tipoff\Support\Models\BaseModel;
 use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
 
-class Fee extends BaseModel
+/**
+ * @property int id
+ * @property string slug
+ * @property string name
+ * @property string title
+ * @property int amount
+ * @property float percent
+ * @property string applies_to
+ * @property bool is_taxed
+ * @property int creator_id
+ */
+class Fee extends BaseModel implements FeeInterface
 {
     use HasCreator;
     use HasPackageFactory;
@@ -20,12 +32,11 @@ class Fee extends BaseModel
     const APPLIES_TO_BOOKING = 'booking';
     const APPLIES_TO_PARTICIPANT = 'participant';
 
-    protected $casts = [];
-
-    protected static function newFactory()
-    {
-        return FeeFactory::new();
-    }
+    protected $casts = [
+        'percent' => 'float',
+        'amount' => 'integer',
+        'is_taxed' => 'boolean'
+    ];
 
     public function getRouteKeyName()
     {
@@ -46,6 +57,8 @@ class Fee extends BaseModel
         });
     }
 
+    //region RELATIONS
+
     public function locationBookingFees()
     {
         return $this->hasMany(app('location'), 'booking_fee_id');
@@ -60,6 +73,22 @@ class Fee extends BaseModel
     {
         return $this->hasMany(app('booking'));
     }
+
+    //endregion
+
+    //region INTERFACE
+
+    public function getDescription(): string
+    {
+        return $this->name;
+    }
+
+    public function getViewComponent($context = null)
+    {
+        return 'fee';
+    }
+
+    //endregion
 
     public function generateTotalFeesByCartItem($cartItem): int
     {

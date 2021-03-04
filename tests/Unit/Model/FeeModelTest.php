@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Tests\TestCase;
 
-class CustomerModelTest extends TestCase
+class FeeModelTest extends TestCase
 {
     use DatabaseTransactions;
 
