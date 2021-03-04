@@ -28,5 +28,4 @@ class FeeComponentTest extends TestCase
         // Invisible!
         $this->assertEquals('', (string) $view);
     }
-
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tipoff\Fees\Models;
 
 use Exception;
-use Tipoff\Fees\Database\Factories\FeeFactory;
 use Tipoff\Support\Contracts\Sellable\Fee as FeeInterface;
 use Tipoff\Support\Models\BaseModel;
 use Tipoff\Support\Traits\HasCreator;
@@ -35,7 +34,7 @@ class Fee extends BaseModel implements FeeInterface
     protected $casts = [
         'percent' => 'float',
         'amount' => 'integer',
-        'is_taxed' => 'boolean'
+        'is_taxed' => 'boolean',
     ];
 
     public function getRouteKeyName()
