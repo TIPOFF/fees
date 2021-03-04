@@ -5,27 +5,37 @@ declare(strict_types=1);
 namespace Tipoff\Fees\Models;
 
 use Exception;
-use Tipoff\Fees\Database\Factories\FeeFactory;
+use Tipoff\Support\Casts\Enum;
+use Tipoff\Support\Contracts\Checkout\CartInterface;
+use Tipoff\Support\Contracts\Checkout\CartItemInterface;
+use Tipoff\Support\Contracts\Sellable\Fee as FeeInterface;
+use Tipoff\Support\Enums\AppliesTo;
 use Tipoff\Support\Models\BaseModel;
 use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
 
-class Fee extends BaseModel
+/**
+ * @property int id
+ * @property string slug
+ * @property string name
+ * @property string title
+ * @property int amount
+ * @property float percent
+ * @property AppliesTo applies_to
+ * @property bool is_taxed
+ * @property int creator_id
+ */
+class Fee extends BaseModel implements FeeInterface
 {
     use HasCreator;
     use HasPackageFactory;
 
-    const APPLIES_TO_EACH = 'each';
-    const APPLIES_TO_PRODUCT = 'product';
-    const APPLIES_TO_BOOKING = 'booking';
-    const APPLIES_TO_PARTICIPANT = 'participant';
-
-    protected $casts = [];
-
-    protected static function newFactory()
-    {
-        return FeeFactory::new();
-    }
+    protected $casts = [
+        'percent' => 'float',
+        'amount' => 'integer',
+        'is_taxed' => 'boolean',
+        'applies_to' => Enum::class.':'.AppliesTo::class,
+    ];
 
     public function getRouteKeyName()
     {
@@ -46,6 +56,8 @@ class Fee extends BaseModel
         });
     }
 
+    //region RELATIONS
+
     public function locationBookingFees()
     {
         return $this->hasMany(app('location'), 'booking_fee_id');
@@ -61,29 +73,52 @@ class Fee extends BaseModel
         return $this->hasMany(app('booking'));
     }
 
-    public function generateTotalFeesByCartItem($cartItem): int
+    //endregion
+
+    //region INTERFACE
+
+    public function getDescription(): string
     {
-        $fee = 0;
+        return $this->name;
+    }
 
-        switch ($this->applies_to) {
-            case self::APPLIES_TO_PRODUCT:
-                break;
-            case self::APPLIES_TO_BOOKING:
-            case self::APPLIES_TO_EACH:
-                if (! empty($this->percent)) {
-                    $fee = $cartItem->amount * ($this->percent / 100);
-                }
-                if (! empty($this->amount)) {
-                    $fee += $this->amount;
-                }
+    public function getViewComponent($context = null)
+    {
+        return 'fee';
+    }
 
-                break;
-            case self::APPLIES_TO_PARTICIPANT:
-                $fee = $cartItem->participants * $this->amount;
+    //endregion
 
-                break;
+    public function createCartItem(int $baseAmount, int $participantsOrQuantity = 1, ?CartItemInterface $linkedCartItem = null): ?CartItemInterface
+    {
+        /** @var CartInterface $service */
+        $service = findService(CartInterface::class);
+        if ($service) {
+            $item = $service::createItem($this, $this->slug, $this->getFeeAmount($baseAmount, $participantsOrQuantity))
+                ->setParentItem($linkedCartItem);
+
+            if ($this->is_taxed) {
+                // TODO - what code to set here?  Move TaxCode to support possibly?
+                $item->setTaxCode('fee');
+            }
+
+            return $item;
         }
 
-        return (int) $fee;
+        return null;
+    }
+
+    public function getFeeAmount(int $baseAmount, int $participantsOrQuantity = 1): int
+    {
+        if ($this->percent) {
+            return (int) (($baseAmount * $this->percent) / 100);
+        }
+
+        if ($this->applies_to === AppliesTo::PARTICIPANT() ||
+            $this->applies_to === AppliesTo::PRODUCT()) {
+            return $participantsOrQuantity * $this->amount;
+        }
+
+        return $this->amount;
     }
 }

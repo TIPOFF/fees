@@ -6,6 +6,7 @@ namespace Tipoff\Fees;
 
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Policies\FeePolicy;
+use Tipoff\Fees\View\Components\FeeComponent;
 use Tipoff\Support\TipoffPackage;
 use Tipoff\Support\TipoffServiceProvider;
 
@@ -20,7 +21,11 @@ class FeesServiceProvider extends TipoffServiceProvider
             ->hasNovaResources([
                 \Tipoff\Fees\Nova\Fee::class,
             ])
+            ->hasBladeComponents([
+                'fee' => FeeComponent::class,
+            ])
             ->name('fees')
+            ->hasViews()
             ->hasConfigFile();
     }
 }
