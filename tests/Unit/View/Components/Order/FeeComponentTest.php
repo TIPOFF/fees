@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tipoff\Fees\Tests\Unit\View\Components;
+namespace Tipoff\Fees\Tests\Unit\View\Components\Order;
 
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Tests\TestCase;
 use Tipoff\Support\Contracts\Checkout\CartItemInterface;
+use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 
 class FeeComponentTest extends TestCase
 {
@@ -15,12 +16,12 @@ class FeeComponentTest extends TestCase
     {
         /** @var Fee $sellable */
         $sellable = Fee::factory()->amount(1234)->create();
-        $cartItem = \Mockery::mock(CartItemInterface::class);
+        $orderItem = \Mockery::mock(OrderItemInterface::class);
 
         $view = $this->blade(
-            '<x-tipoff-fee :cart-item="$cartItem" :sellable="$sellable" />',
+            '<x-tipoff-fee-order-item :order-item="$orderItem" :sellable="$sellable" />',
             [
-                'cartItem' => $cartItem,
+                'orderItem' => $orderItem,
                 'sellable' => $sellable,
             ]
         );

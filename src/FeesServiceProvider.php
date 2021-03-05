@@ -6,7 +6,7 @@ namespace Tipoff\Fees;
 
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Policies\FeePolicy;
-use Tipoff\Fees\View\Components\FeeComponent;
+use Tipoff\Fees\View\Components;
 use Tipoff\Support\TipoffPackage;
 use Tipoff\Support\TipoffServiceProvider;
 
@@ -22,7 +22,8 @@ class FeesServiceProvider extends TipoffServiceProvider
                 \Tipoff\Fees\Nova\Fee::class,
             ])
             ->hasBladeComponents([
-                'fee' => FeeComponent::class,
+                'fee-cart-item' => Components\Cart\FeeComponent::class,
+                'fee-order-item' => Components\Order\FeeComponent::class,
             ])
             ->name('fees')
             ->hasViews()

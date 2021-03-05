@@ -84,7 +84,7 @@ class Fee extends BaseModel implements FeeInterface
 
     public function getViewComponent($context = null)
     {
-        return 'fee';
+        return implode('-', ['tipoff', 'fee', $context]);
     }
 
     //endregion
