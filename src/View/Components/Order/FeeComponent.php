@@ -7,7 +7,6 @@ namespace Tipoff\Fees\View\Components\Order;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Tipoff\Fees\Models\Fee;
-use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 
 class FeeComponent extends Component

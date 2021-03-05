@@ -6,7 +6,6 @@ namespace Tipoff\Fees\Tests\Unit\View\Components\Order;
 
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Tests\TestCase;
-use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Contracts\Checkout\OrderItemInterface;
 
 class FeeComponentTest extends TestCase
