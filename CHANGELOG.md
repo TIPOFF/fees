@@ -28,3 +28,7 @@ All notable changes to `fees` will be documented in this file.
 - add location fees
 - register location fees policy
 - register nova resources
+
+## 2.1.1 - 2021-03-06
+
+- view components
