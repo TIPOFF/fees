@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tipoff\Fees\Tests\Unit\View\Components;
+namespace Tipoff\Fees\Tests\Unit\View\Components\Cart;
 
 use Tipoff\Fees\Models\Fee;
 use Tipoff\Fees\Tests\TestCase;
@@ -18,7 +18,7 @@ class FeeComponentTest extends TestCase
         $cartItem = \Mockery::mock(CartItemInterface::class);
 
         $view = $this->blade(
-            '<x-tipoff-fee :cart-item="$cartItem" :sellable="$sellable" />',
+            '<x-tipoff-fee-cart-item :cart-item="$cartItem" :sellable="$sellable" />',
             [
                 'cartItem' => $cartItem,
                 'sellable' => $sellable,
