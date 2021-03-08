@@ -11,8 +11,7 @@ class AddFeePermissions extends BasePermissionsMigration
         $permissions = [
              'view fees',
              'create fees',
-             'update fees',
-             'delete fees'
+             'update fees'
         ];
 
         $this->createPermissions($permissions);
