@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tipoff\Fees\Tests\Unit\Models;
+namespace Tipoff\Fees\Tests\Unit\Model;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tipoff\Fees\Models\LocationFee;
