@@ -6,6 +6,7 @@ namespace Tipoff\Fees\Tests;
 
 use Laravel\Nova\NovaCoreServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
+use Tipoff\Addresses\AddressesServiceProvider;
 use Tipoff\Authorization\AuthorizationServiceProvider;
 use Tipoff\Fees\FeesServiceProvider;
 use Tipoff\Fees\Tests\Support\Providers\NovaPackageServiceProvider;
@@ -19,6 +20,7 @@ class TestCase extends BaseTestCase
     {
         return [
             SupportServiceProvider::class,
+            AddressesServiceProvider::class,
             AuthorizationServiceProvider::class,
             PermissionServiceProvider::class,
             FeesServiceProvider::class,
