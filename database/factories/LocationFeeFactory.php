@@ -27,7 +27,7 @@ class LocationFeeFactory extends Factory
     public function definition()
     {
         return [
-            'location_id'    => randomOrCreate(Location::class),
+            'location_id'    => randomOrCreate(app('location')),
             'booking_fee_id' => randomOrCreate(Fee::class),
             'product_fee_id' => randomOrCreate(Fee::class),
             'creator_id'     => randomOrCreate(app('user')),
