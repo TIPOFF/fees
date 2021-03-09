@@ -12,7 +12,6 @@ class AddFeePermissions extends BasePermissionsMigration
              'view fees' => ['Owner', 'Staff'],
              'create fees' => ['Owner'],
              'update fees' => ['Owner'],
-             'delete fees' => [],   // Admin only
         ];
 
         $this->createPermissions($permissions);
