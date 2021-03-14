@@ -9,9 +9,9 @@ class AddFeePermissions extends BasePermissionsMigration
     public function up()
     {
         $permissions = [
-             'view fees' => ['Owner', 'Staff'],
-             'create fees' => ['Owner'],
-             'update fees' => ['Owner'],
+             'view fees' => ['Owner', 'Executive', 'Staff'],
+             'create fees' => ['Owner', 'Executive'],
+             'update fees' => ['Owner', 'Executive'],
         ];
 
         $this->createPermissions($permissions);
