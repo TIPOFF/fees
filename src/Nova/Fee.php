@@ -7,6 +7,7 @@ namespace Tipoff\Fees\Nova;
 use \Tipoff\Fees\Models\Fee as FeeModel;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
