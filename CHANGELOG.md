@@ -32,3 +32,7 @@ All notable changes to `fees` will be documented in this file.
 ## 2.1.1 - 2021-03-06
 
 - view components
+
+## 2.2.0 - 2021-03-18
+
+- update migration
