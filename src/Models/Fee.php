@@ -29,6 +29,8 @@ class Fee extends BaseModel implements FeeInterface
 {
     use HasCreator;
     use HasPackageFactory;
+    
+    const UPDATED_AT = null;
 
     protected $casts = [
         'percent' => 'float',

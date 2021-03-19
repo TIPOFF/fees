@@ -6,9 +6,7 @@ namespace Tipoff\Fees\Nova;
 
 use \Tipoff\Fees\Models\Fee as FeeModel;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -70,11 +68,9 @@ class Fee extends BaseResource
 
     protected function dataFields(): array
     {
-        return array_filter([
-            ID::make(),
-            nova('user') ? BelongsTo::make('Created By', 'creator', nova('user'))->exceptOnForms() : null,
-            DateTime::make('Created At')->exceptOnForms(),
-            DateTime::make('Updated At')->exceptOnForms(),
-        ]);
+        return array_merge(
+            parent::dataFields(),
+            $this->creatorDataFields(),
+        );
     }
 }
