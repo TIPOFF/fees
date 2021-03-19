@@ -25,12 +25,7 @@ class CreateFeesTable extends Migration
 
             $table->boolean('is_taxed')->default(false); // Allows taxes to be applied to fees and not just the net booking amount.
             $table->foreignIdFor(app('user'), 'creator_id');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
-    }
-
-    public function down()
-    {
-        Schema::dropIfExists('fees');
     }
 }
