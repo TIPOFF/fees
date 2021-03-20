@@ -16,25 +16,16 @@ class LocationFee extends BaseModel
     use HasUpdater;
     use HasPackageFactory;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function location()
     {
         return $this->belongsTo(app('location'));
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function bookingFee()
     {
         return $this->belongsTo(app('fee'), 'booking_fee_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function productFee()
     {
         return $this->belongsTo(app('fee'), 'product_fee_id');
