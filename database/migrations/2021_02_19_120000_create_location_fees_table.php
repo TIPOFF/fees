@@ -14,9 +14,9 @@ class CreateLocationFeesTable extends Migration
     {
         Schema::create('location_fees', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Location::class)->unique();	// NOTE - unique() added -- there should be exactly one record per location!
-            $table->foreignIdFor(Fee::class, 'booking_fee_id')->nullable(); // Multiple types of fees cannot be charged to a booking. We currently use a per participant fee on bookings.
-            $table->foreignIdFor(Fee::class, 'product_fee_id')->nullable();
+            $table->foreignIdFor(app('location'))->unique();	// NOTE - unique() added -- there should be exactly one record per location!
+            $table->foreignIdFor(app('fee'), 'booking_fee_id')->nullable(); // Multiple types of fees cannot be charged to a booking. We currently use a per participant fee on bookings.
+            $table->foreignIdFor(app('fee'), 'product_fee_id')->nullable();
             $table->foreignIdFor(app('user'), 'creator_id');
             $table->foreignIdFor(app('user'), 'updater_id');
             $table->timestamps();

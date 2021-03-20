@@ -28,8 +28,8 @@ class LocationFeeFactory extends Factory
     {
         return [
             'location_id'    => randomOrCreate(app('location')),
-            'booking_fee_id' => randomOrCreate(Fee::class),
-            'product_fee_id' => randomOrCreate(Fee::class),
+            'booking_fee_id' => randomOrCreate(app('fee')),
+            'product_fee_id' => randomOrCreate(app('fee')),
             'creator_id'     => randomOrCreate(app('user')),
             'updater_id'     => randomOrCreate(app('user'))
         ];
