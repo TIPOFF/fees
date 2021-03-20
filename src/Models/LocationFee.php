@@ -21,7 +21,7 @@ class LocationFee extends BaseModel
      */
     public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(app('location'));
     }
 
     /**
@@ -29,7 +29,7 @@ class LocationFee extends BaseModel
      */
     public function bookingFee()
     {
-        return $this->belongsTo(Fee::class, 'booking_fee_id');
+        return $this->belongsTo(app('fee'), 'booking_fee_id');
     }
 
     /**
@@ -37,6 +37,6 @@ class LocationFee extends BaseModel
      */
     public function productFee()
     {
-        return $this->belongsTo(Fee::class, 'product_fee_id');
+        return $this->belongsTo(app('fee'), 'product_fee_id');
     }
 }
