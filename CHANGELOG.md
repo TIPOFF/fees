@@ -36,3 +36,7 @@ All notable changes to `fees` will be documented in this file.
 ## 2.2.0 - 2021-03-18
 
 - update migration
+
+## 2.3.0 - 2021-04-11
+
+- bump package dependencies
