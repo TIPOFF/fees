@@ -20,6 +20,7 @@ class FeesServiceProvider extends TipoffServiceProvider
             ])
             ->hasNovaResources([
                 \Tipoff\Fees\Nova\Fee::class,
+                \Tipoff\Fees\Nova\LocationFee::class,
             ])
             ->hasBladeComponents([
                 'fee-cart-item' => Components\Cart\FeeComponent::class,

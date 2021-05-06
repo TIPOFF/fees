@@ -70,8 +70,8 @@ class Fee extends BaseResource
 
             new Panel('Data Fields', $this->dataFields()),
 
-            nova('location') ? HasMany::make('Location Booking Fee', 'locationBookingFees', nova('location')) : null,
-            nova('location') ? HasMany::make('Location Product Fee', 'locationProductFees', nova('location')) : null,
+            nova('location_fee') ? HasMany::make('Location Booking Fee', 'locationBookingFees', nova('location_fee')) : null,
+            nova('location_fee') ? HasMany::make('Location Product Fee', 'locationProductFees', nova('location_fee')) : null,
             nova('booking') ? HasMany::make('Bookings', 'bookings', nova('booking')) : null,
         ]);
     }
