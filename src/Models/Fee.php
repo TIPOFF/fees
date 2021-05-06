@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tipoff\Fees\Models;
 
 use Exception;
-use Tipoff\Support\Casts\Enum;
 use Tipoff\Support\Contracts\Checkout\CartInterface;
 use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Contracts\Sellable\Fee as FeeInterface;
