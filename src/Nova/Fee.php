@@ -89,7 +89,7 @@ class Fee extends BaseResource
         $percent = $request->post('percent');
         $amount = $request->post('amount');
 
-        if (!empty($amount) && !empty($percent)) {
+        if (! empty($amount) && ! empty($percent)) {
             $validator
                 ->errors()
                 ->add(

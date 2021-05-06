@@ -68,7 +68,6 @@ class Fee extends BaseModel implements FeeInterface
         return $this->hasMany(LocationFee::class, 'product_fee_id');
     }
 
-
     public function bookings()
     {
         return $this->hasMany(app('booking'));

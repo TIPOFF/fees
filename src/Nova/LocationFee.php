@@ -6,18 +6,11 @@ namespace Tipoff\Fees\Nova;
 
 use \Tipoff\Fees\Models\LocationFee as LocationFeeModel;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Slug;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
-use Tipoff\Support\Enums\AppliesTo;
 use Tipoff\Support\Nova\BaseResource;
-use Laravel\Nova\Fields\BelongsTo;
 
 class LocationFee extends BaseResource
 {
@@ -58,5 +51,4 @@ class LocationFee extends BaseResource
             $this->creatorDataFields(),
         );
     }
-
 }
