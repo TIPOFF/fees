@@ -46,16 +46,26 @@ class Fee extends BaseResource
     {
         return array_filter([
             Text::make('Name (Internal)', 'name')->required(),
-            Text::make('Title (What Customers See)', 'title'),
-            Slug::make('Slug')->from('Title'),
-            Number::make('Amount')->sortable(),
-            Number::make('Percent')->nullable(),
+            Text::make('Title (What Customers See)', 'title')->required(),
+            Slug::make('Slug')->from('Title')->required(),
+            Number::make('Amount')->sortable()
+                ->rules(function () {
+                    return [
+                        'required_if:percent,null,0',
+                    ];
+                }),
+            Number::make('Percent')->nullable()
+                ->rules(function () {
+                    return [
+                        'required_if:amount,null,0',
+                    ];
+                }),
             Select::make('Applies To')->options([
                 AppliesTo::BOOKING => 'Each Booking in Order',
                 AppliesTo::PARTICIPANT => 'Each Participant in Bookings',
                 AppliesTo::PRODUCT => 'Each Product in Order',
                 AppliesTo::BOOKING_AND_PRODUCT => 'Each Booking & Product in Order',
-            ])->required(),
+            ])->required()->displayUsingLabels(),
             Boolean::make('Is Taxed', 'is_taxed'),
 
             new Panel('Data Fields', $this->dataFields()),

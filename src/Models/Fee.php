@@ -29,14 +29,13 @@ class Fee extends BaseModel implements FeeInterface
 {
     use HasCreator;
     use HasPackageFactory;
-    
+
     const UPDATED_AT = null;
 
     protected $casts = [
         'percent' => 'float',
         'amount' => 'integer',
         'is_taxed' => 'boolean',
-        'applies_to' => Enum::class.':'.AppliesTo::class,
     ];
 
     public function getRouteKeyName()
