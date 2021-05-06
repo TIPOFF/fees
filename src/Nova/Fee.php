@@ -45,9 +45,9 @@ class Fee extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
-            Text::make('Name (Internal)', 'name')->required(),
-            Text::make('Title (What Customers See)', 'title')->required(),
-            Slug::make('Slug')->from('Title')->required(),
+            Text::make('Name (Internal)', 'name')->rules('required'),
+            Text::make('Title (What Customers See)', 'title')->rules('required'),
+            Slug::make('Slug')->from('Title')->rules('required'),
             Number::make('Amount')->sortable()
                 ->rules(function () {
                     return [
@@ -82,5 +82,26 @@ class Fee extends BaseResource
             parent::dataFields(),
             $this->creatorDataFields(),
         );
+    }
+
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        $percent = $request->post('percent');
+        $amount = $request->post('amount');
+
+        if (!empty($amount) && !empty($percent)) {
+            $validator
+                ->errors()
+                ->add(
+                    'amount',
+                    'A fee cannot have both an amount & percent.'
+                );
+            $validator
+                ->errors()
+                ->add(
+                    'percent',
+                    'A fee cannot have both an amount & percent.'
+                );
+        }
     }
 }
