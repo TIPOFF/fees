@@ -71,8 +71,7 @@ class LocationFee extends BaseResource
                     'location',
                     'A fee cannot have both a product fee & booking fee.'
                 );
-        }
-        else if (empty($product_fee) && empty($booking_fee)) {
+        } elseif (empty($product_fee) && empty($booking_fee)) {
             $validator
                 ->errors()
                 ->add(
