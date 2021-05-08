@@ -38,8 +38,9 @@ class LocationFee extends BaseResource
     {
         return array_filter([
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->rules('required')->creationRules('unique:location_fees,location_id')->updateRules('unique:location_fees,location_id,{{resourceId}}') : null,
-            nova('fee') ? BelongsTo::make('Booking Fee', 'bookingFee', nova('fee')) : null,
-            nova('fee') ? BelongsTo::make('Product Fee', 'productFee', nova('fee')) : null,
+            nova('fee') ? BelongsTo::make('Product Fee', 'productFee', nova('fee'))->nullable() : null,
+            nova('fee') ? BelongsTo::make('Booking Fee', 'bookingFee', nova('fee'))->nullable() : null,
+
             new Panel('Data Fields', $this->dataFields()),
         ]);
     }
@@ -50,5 +51,40 @@ class LocationFee extends BaseResource
             parent::dataFields(),
             $this->creatorDataFields(),
         );
+    }
+
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        $product_fee = $request->post('productFee');
+        $booking_fee = $request->post('bookingFee');
+
+        if (! empty($product_fee) && ! empty($booking_fee)) {
+            $validator
+                ->errors()
+                ->add(
+                    'location',
+                    'A fee cannot have both a product fee & booking fee.'
+                );
+            $validator
+                ->errors()
+                ->add(
+                    'location',
+                    'A fee cannot have both a product fee & booking fee.'
+                );
+        }
+        else if (empty($product_fee) && empty($booking_fee)) {
+            $validator
+                ->errors()
+                ->add(
+                    'location',
+                    'A fee must have either a product fee or booking fee.'
+                );
+            $validator
+                ->errors()
+                ->add(
+                    'location',
+                    'A fee must have either a product fee or booking fee.'
+                );
+        }
     }
 }

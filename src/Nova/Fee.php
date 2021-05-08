@@ -72,7 +72,7 @@ class Fee extends BaseResource
 
             nova('location_fee') ? HasMany::make('Location Booking Fee', 'locationBookingFees', nova('location_fee')) : null,
             nova('location_fee') ? HasMany::make('Location Product Fee', 'locationProductFees', nova('location_fee')) : null,
-            nova('booking') ? HasMany::make('Bookings', 'bookings', nova('booking')) : null,
+            // nova('booking') ? HasMany::make('Bookings', 'bookings', nova('booking')) : null,
         ]);
     }
 
