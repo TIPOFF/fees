@@ -45,24 +45,34 @@ class Fee extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
-            Text::make('Name (Internal)', 'name')->required(),
-            Text::make('Title (What Customers See)', 'title'),
-            Slug::make('Slug')->from('Title'),
-            Number::make('Amount')->sortable(),
-            Number::make('Percent')->nullable(),
+            Text::make('Name (Internal)', 'name')->rules('required'),
+            Text::make('Title (What Customers See)', 'title')->rules('required'),
+            Slug::make('Slug')->from('Title')->rules('required'),
+            Number::make('Amount')->sortable()
+                ->rules(function () {
+                    return [
+                        'required_if:percent,null,0',
+                    ];
+                }),
+            Number::make('Percent')->nullable()
+                ->rules(function () {
+                    return [
+                        'required_if:amount,null,0',
+                    ];
+                }),
             Select::make('Applies To')->options([
                 AppliesTo::BOOKING => 'Each Booking in Order',
                 AppliesTo::PARTICIPANT => 'Each Participant in Bookings',
                 AppliesTo::PRODUCT => 'Each Product in Order',
                 AppliesTo::BOOKING_AND_PRODUCT => 'Each Booking & Product in Order',
-            ])->required(),
+            ])->required()->displayUsingLabels(),
             Boolean::make('Is Taxed', 'is_taxed'),
 
             new Panel('Data Fields', $this->dataFields()),
 
-            nova('location') ? HasMany::make('Location Booking Fee', 'locationBookingFees', nova('location')) : null,
-            nova('location') ? HasMany::make('Location Product Fee', 'locationProductFees', nova('location')) : null,
-            nova('booking') ? HasMany::make('Bookings', 'bookings', nova('booking')) : null,
+            nova('location_fee') ? HasMany::make('Location Booking Fee', 'locationBookingFees', nova('location_fee')) : null,
+            nova('location_fee') ? HasMany::make('Location Product Fee', 'locationProductFees', nova('location_fee')) : null,
+            // nova('booking') ? HasMany::make('Bookings', 'bookings', nova('booking')) : null,
         ]);
     }
 
@@ -72,5 +82,26 @@ class Fee extends BaseResource
             parent::dataFields(),
             $this->creatorDataFields(),
         );
+    }
+
+    protected static function afterValidation(NovaRequest $request, $validator)
+    {
+        $percent = $request->post('percent');
+        $amount = $request->post('amount');
+
+        if (! empty($amount) && ! empty($percent)) {
+            $validator
+                ->errors()
+                ->add(
+                    'amount',
+                    'A fee cannot have both an amount & percent.'
+                );
+            $validator
+                ->errors()
+                ->add(
+                    'percent',
+                    'A fee cannot have both an amount & percent.'
+                );
+        }
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tipoff\Fees\Models;
 
 use Exception;
-use Tipoff\Support\Casts\Enum;
 use Tipoff\Support\Contracts\Checkout\CartInterface;
 use Tipoff\Support\Contracts\Checkout\CartItemInterface;
 use Tipoff\Support\Contracts\Sellable\Fee as FeeInterface;
@@ -29,14 +28,13 @@ class Fee extends BaseModel implements FeeInterface
 {
     use HasCreator;
     use HasPackageFactory;
-    
+
     const UPDATED_AT = null;
 
     protected $casts = [
         'percent' => 'float',
         'amount' => 'integer',
         'is_taxed' => 'boolean',
-        'applies_to' => Enum::class.':'.AppliesTo::class,
     ];
 
     public function getRouteKeyName()
@@ -62,18 +60,18 @@ class Fee extends BaseModel implements FeeInterface
 
     public function locationBookingFees()
     {
-        return $this->hasMany(app('location'), 'booking_fee_id');
+        return $this->hasMany(app('location_fee'), 'booking_fee_id');
     }
 
     public function locationProductFees()
     {
-        return $this->hasMany(app('location'), 'product_fee_id');
+        return $this->hasMany(app('location_fee'), 'product_fee_id');
     }
 
-    public function bookings()
+    /*public function bookings()
     {
         return $this->hasMany(app('booking'));
-    }
+    }*/
 
     //endregion
 
